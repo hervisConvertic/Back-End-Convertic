@@ -5,6 +5,7 @@ import co.com.convertic.backend.reto.servicio.UsuarioServicio;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
@@ -41,10 +43,25 @@ public class UsuarioControlador {
 
         try {
             System.out.println("ingreso aqui en la respuesta de envio");
-            return ResponseEntity.status(HttpStatus.OK).body(usuarioServicio.save(usuario));
+            return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\" success \"}" + usuarioServicio.save(usuario));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Error\":\"Error en la respuesta\"}");
         }
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Usuario usuario, Model model) {
+        try {
+            Boolean isLogin = usuarioServicio.login(usuario.getCorreoelectronico(), usuario.getContrasena());
+            if (isLogin) {
+                return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");
+            } else {
+                System.out.println("usuario no existe");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"correo o contraseña incorrectos\"}");
+            }
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Error\":\"Error en la respuesta\"}" + e.getMessage());
+        }
+    }
 }

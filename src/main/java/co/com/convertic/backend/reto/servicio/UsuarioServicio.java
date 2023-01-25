@@ -1,4 +1,5 @@
 package co.com.convertic.backend.reto.servicio;
+
 import co.com.convertic.backend.reto.modelo.Usuario;
 import co.com.convertic.backend.reto.repositorio.IUsuarioRepositorio;
 import org.springframework.stereotype.Service;
@@ -14,21 +15,23 @@ public class UsuarioServicio implements IusuarioServicio {
     @Override
     public Usuario save(Usuario usuario) throws Exception {
         try {
-            usuario=iUsuarioRepositorio.save(usuario);
+            usuario = iUsuarioRepositorio.save(usuario);
             return usuario;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
     @Override
-    public Usuario login(String correoelectronico, String contrasena) throws Exception {
+    public Boolean login(String correoelectronico, String contrasena) throws Exception {
         try {
             Usuario usuario=iUsuarioRepositorio.findByCorreoelectronicoAndContrasena(correoelectronico,contrasena);
-            return usuario;
-        }catch (Exception e){
+            if(usuario!=null&&usuario.getCorreoelectronico().equals(correoelectronico)&&usuario.getContrasena().equals(contrasena))
+            return true;
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
+        return false;
     }
 
 
