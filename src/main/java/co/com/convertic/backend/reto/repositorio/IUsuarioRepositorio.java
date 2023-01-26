@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IUsuarioRepositorio extends JpaRepository<Usuario,Integer> {
     Usuario findByCorreoelectronicoAndContrasena(String correoelectronico, String contrasena);
+    Boolean existsByCorreoelectronico(String correoelectronico);
+    Boolean existsByContrasena(String contrasena);
 }

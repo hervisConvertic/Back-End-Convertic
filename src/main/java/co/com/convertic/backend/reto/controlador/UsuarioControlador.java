@@ -44,8 +44,10 @@ public class UsuarioControlador {
         try {
             System.out.println("ingreso aqui en la respuesta de envio");
             return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\" success \"}" + usuarioServicio.save(usuario));
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Error\":\"Error en la respuesta\"}");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\":\"Error:\"}"+e.getMessage());
         }
     }
 
