@@ -10,8 +10,10 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Pattern(regexp = "[a-zA-Z\s]+",message = "nombre solo se permiten letras y espacios")
-    private String tipodocumento;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_tipodocumento")
+    private TipoDocumento tipodocumento;
     @Column(nullable = false)
     @Pattern(regexp = "^[0-9]*$", message = "documento solo puede tener numeros")
     private String documento;
@@ -34,14 +36,12 @@ public class Usuario {
     @Pattern(regexp = "(?=^.{5,}$)((?=.*\\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[^A-Za-z0-9])(?=.*[a-z])|(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9]))^.*", message = "contraseña debe ser de longitud mínima 5, y debe contener letras mayúsculas,\n" +
             "letras minúsculas y números.\n")
     private String contrasena;
-    @Column(nullable = false)
-    @Transient
-    private String confirmacioncontrasena;
+
 
     public Usuario() {
     }
 
-    public Usuario(String tipodocumento, String documento, String nombre1, String nombre2, String apellido1, String apellido2, String correoelectronico, String contrasena) {
+    public Usuario(TipoDocumento tipodocumento, String documento, String nombre1, String nombre2, String apellido1, String apellido2, String correoelectronico, String contrasena) {
         this.tipodocumento = tipodocumento;
         this.documento = documento;
         this.nombre1 = nombre1;
@@ -56,15 +56,11 @@ public class Usuario {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTipodocumento() {
+    public TipoDocumento getTipodocumento() {
         return tipodocumento;
     }
 
-    public void setTipodocumento(String tipodocumento) {
+    public void setTipodocumento(TipoDocumento tipodocumento) {
         this.tipodocumento = tipodocumento;
     }
 
@@ -122,13 +118,5 @@ public class Usuario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
-    }
-
-    public String getConfirmacioncontrasena() {
-        return confirmacioncontrasena;
-    }
-
-    public void setConfirmacioncontrasena(String confirmacioncontrasena) {
-        this.confirmacioncontrasena = confirmacioncontrasena;
     }
 }
