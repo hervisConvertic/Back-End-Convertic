@@ -1,7 +1,9 @@
 package co.com.convertic.backend.reto.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 @Entity
@@ -11,9 +13,6 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_tipodocumento")
-    private TipoDocumento tipodocumento;
     @Column(nullable = false)
     @Pattern(regexp = "^[0-9]*$", message = "documento solo puede tener numeros")
     private String documento;
@@ -36,6 +35,11 @@ public class Usuario {
     @Pattern(regexp = "(?=^.{5,}$)((?=.*\\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[^A-Za-z0-9])(?=.*[a-z])|(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9]))^.*", message = "contraseña debe ser de longitud mínima 5, y debe contener letras mayúsculas,\n" +
             "letras minúsculas y números.\n")
     private String contrasena;
+
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "id_tipodocumento")
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    private TipoDocumento tipodocumento;
 
 
     public Usuario() {

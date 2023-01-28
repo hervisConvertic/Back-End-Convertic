@@ -8,5 +8,28 @@ public class TipoDocumento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String tipodocumento;
+    private String descripcion;
+
+    public TipoDocumento() {
+    }
+
+    public TipoDocumento(String tipodocumento) {
+        this.descripcion = tipodocumento;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String tipodocumento) {
+        this.descripcion = tipodocumento;
+    }
 }

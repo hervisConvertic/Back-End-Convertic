@@ -52,6 +52,7 @@ public class UsuarioControlador {
         try {
             Boolean isLogin = usuarioServicio.login(usuario.getCorreoelectronico(), usuario.getContrasena());
             if (isLogin) {
+                System.out.println("login success");
                 return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");
             } else {
                 System.out.println("usuario no existe");
@@ -60,6 +61,14 @@ public class UsuarioControlador {
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Error\":\"Error en la respuesta\"}" + e.getMessage());
+        }
+    }
+    @GetMapping("/usuario")
+    public ResponseEntity<?> getAll() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(usuarioServicio.findAll());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"Error\":\"Error. no se encuentra el usuario\"}");
         }
     }
 }

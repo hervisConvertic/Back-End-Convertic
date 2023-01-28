@@ -2,11 +2,12 @@ package co.com.convertic.backend.reto.servicio;
 
 import co.com.convertic.backend.reto.modelo.Usuario;
 import co.com.convertic.backend.reto.repositorio.IUsuarioRepositorio;
-import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class UsuarioServicio implements IusuarioServicio {
+public class UsuarioServicio implements IUsuarioServicio {
     private IUsuarioRepositorio iUsuarioRepositorio;
 
     public UsuarioServicio(IUsuarioRepositorio iUsuarioRepositorio) {
@@ -40,6 +41,16 @@ public class UsuarioServicio implements IusuarioServicio {
             throw new Exception(e.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public List<Usuario> findAll() throws Exception {
+        try {
+            List<Usuario> usuarios=iUsuarioRepositorio.findAll();
+            return usuarios;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
 
 
