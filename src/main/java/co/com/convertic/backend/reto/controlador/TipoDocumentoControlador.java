@@ -1,6 +1,6 @@
 package co.com.convertic.backend.reto.controlador;
 
-import co.com.convertic.backend.reto.servicio.TipoDocumentoServicio;
+import co.com.convertic.backend.reto.servicio.implementacion.TipoDocumentoServicio;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/tipoDocumento")
 public class TipoDocumentoControlador {
     private TipoDocumentoServicio tipoDocumentoServicio;
 
     public TipoDocumentoControlador(TipoDocumentoServicio tipoDocumentoServicio) {
         this.tipoDocumentoServicio = tipoDocumentoServicio;
     }
-    @GetMapping("/verTiposdocumento")
+    @GetMapping
     public ResponseEntity<?> getAll() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(tipoDocumentoServicio.findAll());

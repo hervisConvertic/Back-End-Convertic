@@ -1,9 +1,9 @@
-package co.com.convertic.backend.reto.servicio;
+package co.com.convertic.backend.reto.servicio.interfazServicio;
 
 import co.com.convertic.backend.reto.modelo.TipoDocumento;
 
 import java.util.List;
 
 public interface ITipoDocumentoServicio {
-    public List<TipoDocumento> findAll() throws Exception;
+    List<TipoDocumento> findAll() throws Exception;
 }

@@ -1,21 +1,19 @@
 package co.com.convertic.backend.reto.controlador;
 
 import co.com.convertic.backend.reto.modelo.Usuario;
-import co.com.convertic.backend.reto.servicio.UsuarioServicio;
+import co.com.convertic.backend.reto.servicio.implementacion.UsuarioServicio;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/usuario")
 public class UsuarioControlador {
     private UsuarioServicio usuarioServicio;
 
@@ -23,7 +21,7 @@ public class UsuarioControlador {
         this.usuarioServicio = usuarioServicio;
     }
 
-    @PostMapping("/registrar")
+    @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody Usuario usuario, BindingResult bindingResult) {
         Usuario usuarioIngresado = null;
         Map<String, Object> response = new HashMap<>();
@@ -47,8 +45,8 @@ public class UsuarioControlador {
         }
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Usuario usuario, Model model) {
+    @PostMapping("/login-request")
+    public ResponseEntity<?> login(@RequestBody Usuario usuario) {
         try {
             Boolean isLogin = usuarioServicio.login(usuario.getCorreoelectronico(), usuario.getContrasena());
             if (isLogin) {
@@ -58,12 +56,11 @@ public class UsuarioControlador {
                 System.out.println("usuario no existe");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"correo o contraseña incorrectos\"}");
             }
-
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Error\":\"Error en la respuesta\"}" + e.getMessage());
         }
     }
-    @GetMapping("/usuario")
+    @GetMapping
     public ResponseEntity<?> getAll() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(usuarioServicio.findAll());
@@ -71,4 +68,14 @@ public class UsuarioControlador {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"Error\":\"Error. no se encuentra el usuario\"}");
         }
     }
+    //para cristina
+    @GetMapping("/documento/{descripcion}")
+    public ResponseEntity<?> getDocumento(@PathVariable String descripcion) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(usuarioServicio.getByTipoDocumento(descripcion));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"Error\":\"Error. no se encuentran usuarios\"}");
+        }
+    }
+
 }

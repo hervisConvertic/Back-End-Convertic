@@ -1,7 +1,9 @@
-package co.com.convertic.backend.reto.servicio;
+package co.com.convertic.backend.reto.servicio.implementacion;
 
 import co.com.convertic.backend.reto.modelo.Usuario;
 import co.com.convertic.backend.reto.repositorio.IUsuarioRepositorio;
+import co.com.convertic.backend.reto.servicio.interfazServicio.IUsuarioServicio;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
 public class UsuarioServicio implements IUsuarioServicio {
     private IUsuarioRepositorio iUsuarioRepositorio;
 
+    @Autowired
     public UsuarioServicio(IUsuarioRepositorio iUsuarioRepositorio) {
         this.iUsuarioRepositorio = iUsuarioRepositorio;
     }
@@ -20,14 +23,12 @@ public class UsuarioServicio implements IUsuarioServicio {
             if (iUsuarioRepositorio.existsByCorreoelectronico(usuario.getCorreoelectronico())) {
                 throw new IllegalArgumentException("correo ya se encuentra registrado");
             }
-            if (iUsuarioRepositorio.existsByContrasena(usuario.getContrasena())) {
-                throw new IllegalArgumentException("contrasena ya se encuentra registrada");
+            return iUsuarioRepositorio.save(usuario);
+        } catch (Exception e) {
+            if (e instanceof IllegalArgumentException) {
+                throw e;
             }
-            usuario = iUsuarioRepositorio.save(usuario);
-            return usuario;
-        } catch (
-                Exception e) {
-            throw new Exception(e.getMessage());
+            throw new Exception("Error inesperado tratando de guardar el usuario");
         }
     }
 
@@ -35,23 +36,23 @@ public class UsuarioServicio implements IUsuarioServicio {
     public Boolean login(String correoelectronico, String contrasena) throws Exception {
         try {
             Usuario usuario = iUsuarioRepositorio.findByCorreoelectronicoAndContrasena(correoelectronico, contrasena);
-            if (usuario != null && usuario.getCorreoelectronico().equals(correoelectronico) && usuario.getContrasena().equals(contrasena))
-                return true;
+            return usuario != null;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
-        return false;
     }
 
     @Override
     public List<Usuario> findAll() throws Exception {
         try {
-            List<Usuario> usuarios=iUsuarioRepositorio.findAll();
-            return usuarios;
-        }catch (Exception e){
+            return iUsuarioRepositorio.findAll();
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
-
-
+    //para cristina
+    @Override
+    public List<Usuario> getByTipoDocumento(String descripcion) {
+        return iUsuarioRepositorio.getByTipodocumento(descripcion);
+    }
 }
