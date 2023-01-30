@@ -20,7 +20,7 @@ public class UsuarioServicio implements IUsuarioServicio {
     @Override
     public Usuario save(Usuario usuario) throws Exception {
         try {
-            if (iUsuarioRepositorio.existsByCorreoelectronico(usuario.getCorreoelectronico())) {
+            if (iUsuarioRepositorio.existsByCorreo(usuario.getCorreo())) {
                 throw new IllegalArgumentException("correo ya se encuentra registrado");
             }
             return iUsuarioRepositorio.save(usuario);
@@ -35,7 +35,7 @@ public class UsuarioServicio implements IUsuarioServicio {
     @Override
     public Boolean login(String correoelectronico, String contrasena) throws Exception {
         try {
-            Usuario usuario = iUsuarioRepositorio.findByCorreoelectronicoAndContrasena(correoelectronico, contrasena);
+            Usuario usuario = iUsuarioRepositorio.findByCorreoAndContrasena(correoelectronico, contrasena);
             return usuario != null;
         } catch (Exception e) {
             throw new Exception(e.getMessage());

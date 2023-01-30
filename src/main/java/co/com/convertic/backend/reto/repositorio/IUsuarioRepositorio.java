@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface IUsuarioRepositorio extends JpaRepository<Usuario, Integer> {
-    Usuario findByCorreoelectronicoAndContrasena(String correoelectronico, String contrasena);
+    Usuario findByCorreoAndContrasena(String correoElectronico, String contrasena);
 
-    Boolean existsByCorreoelectronico(String correoelectronico);
+    Boolean existsByCorreo(String correoElectronico);
 
    //para cristina
-    @Query("FROM Usuario WHERE tipodocumento.descripcion = :descripcion")
+    @Query("FROM Usuario WHERE tipoDocumento.descripcion= :descripcion")
     List<Usuario> getByTipodocumento(String descripcion);
 }

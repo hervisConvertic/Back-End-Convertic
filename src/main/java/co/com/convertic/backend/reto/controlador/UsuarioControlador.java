@@ -48,7 +48,7 @@ public class UsuarioControlador {
     @PostMapping("/login-request")
     public ResponseEntity<?> login(@RequestBody Usuario usuario) {
         try {
-            Boolean isLogin = usuarioServicio.login(usuario.getCorreoelectronico(), usuario.getContrasena());
+            Boolean isLogin = usuarioServicio.login(usuario.getCorreo(), usuario.getContrasena());
             if (isLogin) {
                 System.out.println("login success");
                 return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");

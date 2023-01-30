@@ -3,7 +3,6 @@ package co.com.convertic.backend.reto.modelo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 @Entity
@@ -30,7 +29,7 @@ public class Usuario {
     private String apellido2;
     @Column(nullable = false)
     @Email(message = "por favor ingrese un correo electronico valido")
-    private String correoelectronico;
+    private String correo;
     @Column(nullable = false)
     @Pattern(regexp = "(?=^.{5,}$)((?=.*\\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[^A-Za-z0-9])(?=.*[a-z])|(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|(?=.*\\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9]))^.*", message = "contraseña debe ser de longitud mínima 5, y debe contener letras mayúsculas,\n" +
             "letras minúsculas y números.\n")
@@ -39,33 +38,33 @@ public class Usuario {
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "id_tipodocumento")
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    private TipoDocumento tipodocumento;
+    private TipoDocumento tipoDocumento;
 
 
     public Usuario() {
     }
 
-    public Usuario(TipoDocumento tipodocumento, String documento, String nombre1, String nombre2, String apellido1, String apellido2, String correoelectronico, String contrasena) {
-        this.tipodocumento = tipodocumento;
+    public Usuario(String documento, String nombre1, String nombre2, String apellido1, String apellido2, String correo, String contrasena, TipoDocumento tipoDocumento) {
         this.documento = documento;
         this.nombre1 = nombre1;
         this.nombre2 = nombre2;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
-        this.correoelectronico = correoelectronico;
+        this.correo = correo;
         this.contrasena = contrasena;
+        this.tipoDocumento = tipoDocumento;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public TipoDocumento getTipodocumento() {
-        return tipodocumento;
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
     }
 
-    public void setTipodocumento(TipoDocumento tipodocumento) {
-        this.tipodocumento = tipodocumento;
+    public void setTipoDocumento(TipoDocumento tipodocumento) {
+        this.tipoDocumento = tipodocumento;
     }
 
     public String getDocumento() {
@@ -108,12 +107,12 @@ public class Usuario {
         this.apellido2 = apellido2;
     }
 
-    public String getCorreoelectronico() {
-        return correoelectronico;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setCorreoelectronico(String correoelectronico) {
-        this.correoelectronico = correoelectronico;
+    public void setCorreo(String correoelectronico) {
+        this.correo = correoelectronico;
     }
 
     public String getContrasena() {
