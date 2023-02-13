@@ -18,7 +18,11 @@ public class ProductoTallaServicio implements IProductoTallaServicio {
     }
 
     @Override
-    public List<ProductoTalla> getByProductoGenero(String descripcion) {
-        return productoTallaRepositorio.getByProductoGenero(descripcion);
+    public List<ProductoTalla> obtenerProductoPorGenero(String descripcion) throws Exception {
+        try {
+            return productoTallaRepositorio.getByProductoGenero(descripcion);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
 }

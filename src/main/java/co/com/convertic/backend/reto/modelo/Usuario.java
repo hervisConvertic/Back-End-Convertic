@@ -17,16 +17,12 @@ public class Usuario {
     private String documento;
     @Column(nullable = false)
     @Pattern(regexp = "[a-zA-Z\s]+",message = "nombre solo se permiten letras y espacios")
-    private String nombre1;
-    @Column(nullable = false)
-    @Pattern(regexp = "[a-zA-Z\s]+",message = "nombre solo se permiten letras y espacios")
-    private String nombre2;
+    private String nombre;
+
     @Column(nullable = false)
     @Pattern(regexp = "[a-zA-Z\s]+",message = "apellido solo se permiten letras y espacios")
-    private String apellido1;
-    @Column(nullable = false)
-    @Pattern(regexp = "[a-zA-Z\s]+",message = "apellido solo se permiten letras y espacios")
-    private String apellido2;
+    private String apellido;
+
     @Column(nullable = false)
     @Email(message = "por favor ingrese un correo electronico valido")
     private String correo;
@@ -44,12 +40,10 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String documento, String nombre1, String nombre2, String apellido1, String apellido2, String correo, String contrasena, TipoDocumento tipoDocumento) {
+    public Usuario(String documento, String nombre, String apellido, String correo, String contrasena, TipoDocumento tipoDocumento) {
         this.documento = documento;
-        this.nombre1 = nombre1;
-        this.nombre2 = nombre2;
-        this.apellido1 = apellido1;
-        this.apellido2 = apellido2;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.correo = correo;
         this.contrasena = contrasena;
         this.tipoDocumento = tipoDocumento;
@@ -59,12 +53,8 @@ public class Usuario {
         return id;
     }
 
-    public TipoDocumento getTipoDocumento() {
-        return tipoDocumento;
-    }
-
-    public void setTipoDocumento(TipoDocumento tipodocumento) {
-        this.tipoDocumento = tipodocumento;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getDocumento() {
@@ -75,44 +65,28 @@ public class Usuario {
         this.documento = documento;
     }
 
-    public String getNombre1() {
-        return nombre1;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombre1(String nombre1) {
-        this.nombre1 = nombre1;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getNombre2() {
-        return nombre2;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setNombre2(String nombre2) {
-        this.nombre2 = nombre2;
-    }
-
-    public String getApellido1() {
-        return apellido1;
-    }
-
-    public void setApellido1(String apellido1) {
-        this.apellido1 = apellido1;
-    }
-
-    public String getApellido2() {
-        return apellido2;
-    }
-
-    public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getCorreo() {
         return correo;
     }
 
-    public void setCorreo(String correoelectronico) {
-        this.correo = correoelectronico;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getContrasena() {
@@ -121,5 +95,13 @@ public class Usuario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
     }
 }
