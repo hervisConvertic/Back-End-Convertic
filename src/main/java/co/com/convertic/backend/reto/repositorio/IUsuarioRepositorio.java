@@ -10,8 +10,4 @@ public interface IUsuarioRepositorio extends JpaRepository<Usuario, Integer> {
     Usuario findByCorreoAndContrasena(String correoElectronico, String contrasena);
 
     Boolean existsByCorreo(String correoElectronico);
-
-   //para cristina
-    @Query("FROM Usuario WHERE tipoDocumento.descripcion= :descripcion")
-    List<Usuario> getByTipodocumento(String descripcion);
 }

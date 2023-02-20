@@ -5,11 +5,9 @@ import co.com.convertic.backend.reto.modelo.Usuario;
 import java.util.List;
 
 public interface IUsuarioServicio {
-    Usuario save(Usuario usuario) throws Exception;
+    Usuario registrarUsuario(Usuario usuario) throws Exception;
 
-    Boolean login(String correoelectronico, String contrasena) throws Exception;
+    Boolean loguearUsuario(String correoelectronico, String contrasena) throws Exception;
 
-    List<Usuario> findAll() throws Exception;
-    //para cristina
-    List<Usuario> getByTipoDocumento(String descripcion);
+    List<Usuario> obtenerUsuario() throws Exception;
 }

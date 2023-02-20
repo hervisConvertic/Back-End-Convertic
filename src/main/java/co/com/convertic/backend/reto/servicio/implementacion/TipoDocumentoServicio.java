@@ -18,7 +18,7 @@ public class TipoDocumentoServicio implements ITipoDocumentoServicio {
     }
 
     @Override
-    public List<TipoDocumento> findAll() throws Exception {
+    public List<TipoDocumento> obtenerTiposDocumento() throws Exception {
         try {
             return tipoDocumentoRepositorio.findAll();
         } catch (Exception e) {

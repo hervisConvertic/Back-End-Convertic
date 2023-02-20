@@ -12,7 +12,7 @@ public class Producto {
     private String descripcion;
     private String color;
     private double precio;
-    private int busquedas;
+    private int busqueda;
     private String imagen;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_marca")
@@ -26,11 +26,11 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(String descripcion, String color, double precio, int busquedas, String imagen, Marca marca, Genero genero) {
+    public Producto(String descripcion, String color, double precio, int busqueda, String imagen, Marca marca, Genero genero) {
         this.descripcion = descripcion;
         this.color = color;
         this.precio = precio;
-        this.busquedas = busquedas;
+        this.busqueda = busqueda;
         this.imagen = imagen;
         this.marca = marca;
         this.genero = genero;
@@ -68,12 +68,12 @@ public class Producto {
         this.precio = precio;
     }
 
-    public int getBusquedas() {
-        return busquedas;
+    public int getBusqueda() {
+        return busqueda;
     }
 
-    public void setBusquedas(int busquedas) {
-        this.busquedas = busquedas;
+    public void setBusqueda(int busquedas) {
+        this.busqueda = busquedas;
     }
 
     public String getImagen() {

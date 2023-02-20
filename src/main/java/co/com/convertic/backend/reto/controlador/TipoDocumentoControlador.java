@@ -17,13 +17,13 @@ public class TipoDocumentoControlador {
     public TipoDocumentoControlador(TipoDocumentoServicio tipoDocumentoServicio) {
         this.tipoDocumentoServicio = tipoDocumentoServicio;
     }
+
     @GetMapping
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity<?> obtenerTipoDocumento() {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(tipoDocumentoServicio.findAll());
+            return ResponseEntity.status(HttpStatus.OK).body(tipoDocumentoServicio.obtenerTiposDocumento());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"Error\":\"tipod de documento no encontrados.\"}");
         }
     }
-
 }

@@ -18,7 +18,7 @@ public class UsuarioServicio implements IUsuarioServicio {
     }
 
     @Override
-    public Usuario save(Usuario usuario) throws Exception {
+    public Usuario registrarUsuario(Usuario usuario) throws Exception {
         try {
             if (iUsuarioRepositorio.existsByCorreo(usuario.getCorreo())) {
                 throw new IllegalArgumentException("correo ya se encuentra registrado");
@@ -33,7 +33,7 @@ public class UsuarioServicio implements IUsuarioServicio {
     }
 
     @Override
-    public Boolean login(String correoelectronico, String contrasena) throws Exception {
+    public Boolean loguearUsuario(String correoelectronico, String contrasena) throws Exception {
         try {
             Usuario usuario = iUsuarioRepositorio.findByCorreoAndContrasena(correoelectronico, contrasena);
             return usuario != null;
@@ -43,16 +43,11 @@ public class UsuarioServicio implements IUsuarioServicio {
     }
 
     @Override
-    public List<Usuario> findAll() throws Exception {
+    public List<Usuario> obtenerUsuario() throws Exception {
         try {
             return iUsuarioRepositorio.findAll();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
-    }
-    //para cristina
-    @Override
-    public List<Usuario> getByTipoDocumento(String descripcion) {
-        return iUsuarioRepositorio.getByTipodocumento(descripcion);
     }
 }
