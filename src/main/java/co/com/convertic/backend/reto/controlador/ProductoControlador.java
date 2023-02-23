@@ -26,6 +26,7 @@ public class ProductoControlador {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"Error\":\"Error. no se encuentran productos\"}");
         }
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerProductoPorId(@PathVariable Integer id) {
         try {
@@ -34,6 +35,7 @@ public class ProductoControlador {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"Error\":\"Error. no se encuentra producto\"}");
         }
     }
+
     @GetMapping
     public ResponseEntity<?> obtenerProductosMasBuscados() {
         try {

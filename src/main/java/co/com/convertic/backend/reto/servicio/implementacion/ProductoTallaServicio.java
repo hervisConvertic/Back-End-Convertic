@@ -25,4 +25,22 @@ public class ProductoTallaServicio implements IProductoTallaServicio {
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public ProductoTalla obtenerProductoPorId(Integer id) throws Exception {
+        try {
+            return productoTallaRepositorio.getByProductoId(id);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    public ProductoTalla obtenerCantidad(Integer idProducto, Integer idTalla) throws Exception {
+        try {
+            return productoTallaRepositorio.getByProductoIdAndTallaId(idProducto,idTalla);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 }

@@ -44,10 +44,10 @@ public class ProductoServicio implements IProductoServicio {
     @Override
     public List<Producto> obtenerProductosMasBuscados() throws Exception {
         try {
-            return productoRepositorio.findTop2ByOrderByBusquedaDesc();
+            return productoRepositorio.findTop4ByOrderByBusquedaDesc();
         }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
+        throw new Exception(e.getMessage());
+    }
     }
 
 
