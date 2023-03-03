@@ -2,12 +2,14 @@ package co.com.convertic.backend.reto.controlador;
 
 import co.com.convertic.backend.reto.modelo.Usuario;
 import co.com.convertic.backend.reto.servicio.implementacion.UsuarioServicio;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,8 +54,16 @@ public class UsuarioControlador {
         try {
             Boolean isLogin = usuarioServicio.loguearUsuario(usuario.getCorreo(), usuario.getContrasena());
             if (isLogin) {
+
                 System.out.println("login success");
-                return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");
+                String correo = usuario.getCorreo();
+                Map<String, String> respuesta = new HashMap<>();
+                respuesta.put("correo_electronico", correo);
+                ObjectMapper objectMapper = new ObjectMapper();
+                String json = objectMapper.writeValueAsString(respuesta);
+                return ResponseEntity.status(HttpStatus.OK).body(json);
+                //return ResponseEntity.status(HttpStatus.OK).body(usuario.getCorreo());
+                //return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");
             } else {
                 System.out.println("usuario no existe");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"correo o contraseña incorrectos\"}");
@@ -64,11 +74,23 @@ public class UsuarioControlador {
     }
 
     @GetMapping
-    public ResponseEntity<?> obtenerUsuario() {
+    public ResponseEntity<List<Usuario>> obtenerUsuario() {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(usuarioServicio.obtenerUsuario());
+            List<Usuario> usuario = usuarioServicio.obtenerUsuario();
+            return ResponseEntity.status(HttpStatus.OK).body(usuario);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"Error\":\"Error. no se encuentra el usuario\"}");
+            Map<String, String> responseBody = new HashMap<>();
+            responseBody.put("mensaje", "No se encuentra el usuario");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<Usuario>());
+        }
+    }
+
+    @GetMapping("/{correo}")
+    public ResponseEntity<Usuario> obternerUsuarioPorCorreo(@PathVariable String correo, Usuario usuario) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(usuarioServicio.obternerUsuarioPorCorreo(correo));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }

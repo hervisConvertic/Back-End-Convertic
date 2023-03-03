@@ -10,4 +10,6 @@ public interface IUsuarioServicio {
     Boolean loguearUsuario(String correoelectronico, String contrasena) throws Exception;
 
     List<Usuario> obtenerUsuario() throws Exception;
+
+    Usuario obternerUsuarioPorCorreo(String correo) throws Exception;
 }

@@ -50,4 +50,15 @@ public class UsuarioServicio implements IUsuarioServicio {
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public Usuario obternerUsuarioPorCorreo(String correo) throws Exception {
+        try {
+            return iUsuarioRepositorio.findByCorreo(correo);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+
 }

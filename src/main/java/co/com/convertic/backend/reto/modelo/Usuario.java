@@ -104,4 +104,11 @@ public class Usuario {
     public void setTipoDocumento(TipoDocumento tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "correo='" + correo + '\'' +
+                '}';
+    }
 }
