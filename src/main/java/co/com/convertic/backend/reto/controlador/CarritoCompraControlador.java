@@ -36,4 +36,13 @@ public class CarritoCompraControlador {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<CarritoCompra> eliminarCarritoPorId(@PathVariable Integer id){
+        try {
+            carritoCompraServicio.delete(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 }

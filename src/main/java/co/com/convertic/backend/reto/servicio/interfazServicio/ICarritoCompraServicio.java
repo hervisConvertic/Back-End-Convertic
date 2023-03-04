@@ -10,4 +10,6 @@ public interface ICarritoCompraServicio {
     CarritoCompra registrarProducto(CarritoCompra carritoCompra) throws Exception;
 
     List<CarritoCompra> obtenerCarritoPorUsuarioId(Integer id) throws Exception;
+
+    void delete(Integer id) throws Exception;
 }
