@@ -45,4 +45,13 @@ public class CarritoCompraControlador {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+    @PatchMapping("/{id}")
+    public ResponseEntity<CarritoCompra> actualizarInventario(@PathVariable Integer id){
+        try {
+            this.carritoCompraServicio.actualizarInventario(id);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 }

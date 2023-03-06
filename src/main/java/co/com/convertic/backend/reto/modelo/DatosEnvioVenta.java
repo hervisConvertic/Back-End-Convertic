@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="ventas")
-public class Venta {
+@Table(name="datos_envio_venta")
+public class DatosEnvioVenta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -26,10 +26,10 @@ public class Venta {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Usuario usuario;
 
-    public Venta() {
+    public DatosEnvioVenta() {
     }
 
-    public Venta(int id, String direccion, String correo, LocalDate fecha, Ciudad ciudad, Usuario usuario) {
+    public DatosEnvioVenta(int id, String direccion, String correo, LocalDate fecha, Ciudad ciudad, Usuario usuario) {
         this.id = id;
         this.direccion = direccion;
         this.correo = correo;

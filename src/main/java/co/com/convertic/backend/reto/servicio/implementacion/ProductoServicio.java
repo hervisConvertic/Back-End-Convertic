@@ -18,14 +18,14 @@ public class ProductoServicio implements IProductoServicio {
 
     @Override
     public List<Producto> buscarPorDescripcionMarcaColor(String termino, String genero) {
-        return productoRepositorio.findProductoByDescripcionOrColorOrMarcaAndGenero(termino,genero);
+        return productoRepositorio.findProductoByDescripcionOrColorOrMarcaAndGenero(termino, genero);
     }
 
     @Override
     public Optional<Producto> obtenerProductoPorId(Integer id) throws Exception {
         try {
-        return productoRepositorio.findById(id);
-        }catch (Exception e){
+            return productoRepositorio.findById(id);
+        } catch (Exception e) {
 
             throw new Exception(e.getMessage());
         }
@@ -34,9 +34,9 @@ public class ProductoServicio implements IProductoServicio {
     @Override
     public void actualizarBusqueda(Producto producto) throws Exception {
         try {
-            producto.setBusqueda(producto.getBusqueda()+1);
+            producto.setBusqueda(producto.getBusqueda() + 1);
             productoRepositorio.save(producto);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
@@ -45,9 +45,9 @@ public class ProductoServicio implements IProductoServicio {
     public List<Producto> obtenerProductosMasBuscados() throws Exception {
         try {
             return productoRepositorio.findTop4ByOrderByBusquedaDesc();
-        }catch (Exception e){
-        throw new Exception(e.getMessage());
-    }
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
 

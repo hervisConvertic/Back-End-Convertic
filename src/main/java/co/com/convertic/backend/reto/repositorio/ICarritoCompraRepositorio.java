@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface ICarritoCompraRepositorio extends JpaRepository<CarritoCompra,Integer> {
+public interface ICarritoCompraRepositorio extends JpaRepository<CarritoCompra, Integer> {
 
     @Query("FROM CarritoCompra WHERE usuario.id=:id")
     List<CarritoCompra> getByUsuario(Integer id);
+
+    List<CarritoCompra> findCarritoCompraByUsuarioId(Integer id);
+
 }
