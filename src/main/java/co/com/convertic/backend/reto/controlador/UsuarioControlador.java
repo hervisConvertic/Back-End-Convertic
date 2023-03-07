@@ -41,35 +41,36 @@ public class UsuarioControlador {
         try {
             System.out.println("ingreso aqui en la respuesta de envio");
             this.usuarioServicio.registrarUsuario(usuario);
-            return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");
+
+            return ResponseEntity.status(HttpStatus.OK).body(usuario);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("mensaje", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+            // return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"status\":\"Error:\"}" + e.getMessage());
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("mensaje", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+            //return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( e.getMessage());
         }
     }
 
     @PostMapping("/login-request")
-    public ResponseEntity<?> logearUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<?> logearUsuario(@RequestBody Usuario usuario) throws Exception {
         try {
             Boolean isLogin = usuarioServicio.loguearUsuario(usuario.getCorreo(), usuario.getContrasena());
             if (isLogin) {
-
                 System.out.println("login success");
-                String correo = usuario.getCorreo();
-                Map<String, String> respuesta = new HashMap<>();
-                respuesta.put("correo_electronico", correo);
-                ObjectMapper objectMapper = new ObjectMapper();
-                String json = objectMapper.writeValueAsString(respuesta);
-                return ResponseEntity.status(HttpStatus.OK).body(json);
-                //return ResponseEntity.status(HttpStatus.OK).body(usuario.getCorreo());
-                //return ResponseEntity.status(HttpStatus.OK).body("{\"status\":\"success\"}");
+                return ResponseEntity.status(HttpStatus.OK).body(usuario);
             } else {
                 System.out.println("usuario no existe");
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"status\":\"correo o contraseña incorrectos\"}");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"mensaje\":\"correo electrónico o contraseña incorrectos\"}");
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Error\":\"Error en la respuesta\"}" + e.getMessage());
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error en la respuesta\"}" + e.getMessage());
+
         }
     }
 
