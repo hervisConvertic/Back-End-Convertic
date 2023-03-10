@@ -50,5 +50,14 @@ public class ProductoServicio implements IProductoServicio {
         }
     }
 
+    @Override
+    public List<Producto> obtenerProductoPorGenero(String genero) throws Exception {
+        try {
+            return productoRepositorio.findProductoByGeneroDescripcion(genero);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
 
 }

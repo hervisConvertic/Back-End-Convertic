@@ -12,4 +12,7 @@ public interface  IProductoRepositorio extends JpaRepository<Producto, Integer> 
     List<Producto> findProductoByDescripcionOrColorOrMarcaAndGenero(String termino, String genero);
 
     List<Producto> findTop4ByOrderByBusquedaDesc();
+
+    @Query("SELECT p FROM Producto p WHERE p.genero.descripcion = ?1")
+    List<Producto> findProductoByGeneroDescripcion(String genero);
 }

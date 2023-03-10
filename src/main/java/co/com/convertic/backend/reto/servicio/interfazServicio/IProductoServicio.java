@@ -14,4 +14,6 @@ public interface IProductoServicio {
     void actualizarBusqueda(Producto producto) throws Exception;
 
     List<Producto> obtenerProductosMasBuscados() throws Exception;
+
+    List<Producto> obtenerProductoPorGenero(String genero)throws  Exception;
 }

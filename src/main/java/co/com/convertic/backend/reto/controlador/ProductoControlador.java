@@ -45,6 +45,14 @@ public class ProductoControlador {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"Error\":\"Error. no se encuentran productos\"}");
         }
     }
+    @GetMapping("/genero/{genero}")
+    public ResponseEntity<List<Producto>> obtenerProductoPorGenero(@PathVariable String genero){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(productoServicio.obtenerProductoPorGenero(genero));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> actualizarBusquedaPorId(@PathVariable Integer id) {
