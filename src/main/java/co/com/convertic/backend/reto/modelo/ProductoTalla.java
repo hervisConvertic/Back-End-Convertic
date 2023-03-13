@@ -9,6 +9,7 @@ public class ProductoTalla {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false)
     private int stock;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_talla")

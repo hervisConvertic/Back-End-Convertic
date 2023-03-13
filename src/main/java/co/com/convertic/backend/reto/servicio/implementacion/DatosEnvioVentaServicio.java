@@ -1,6 +1,6 @@
 package co.com.convertic.backend.reto.servicio.implementacion;
 
-import co.com.convertic.backend.reto.modelo.DatosEnvioVenta;
+import co.com.convertic.backend.reto.modelo.Venta;
 import co.com.convertic.backend.reto.repositorio.IDatosEnvioVentaRepositorio;
 import co.com.convertic.backend.reto.servicio.interfazServicio.IDatosEnvioVentaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class DatosEnvioVentaServicio implements IDatosEnvioVentaServicio {
     }
 
     @Override
-    public DatosEnvioVenta registrarDatosVenta(DatosEnvioVenta datosEnvioVenta) throws Exception {
+    public Venta registrarDatosVenta(Venta datosEnvioVenta) throws Exception {
         try {
             return datosEnvioVentaRepositorio.save(datosEnvioVenta);
         }catch (Exception e){

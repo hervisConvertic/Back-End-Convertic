@@ -3,18 +3,19 @@ package co.com.convertic.backend.reto.modelo;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="marcas")
-public class Marca {
+@Table(name="colores")
+public class Color {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false)
     private String descripcion;
 
-    public Marca() {
+    public Color() {
     }
 
-    public Marca(String descripcion) {
+    public Color(String descripcion) {
         this.descripcion = descripcion;
     }
 

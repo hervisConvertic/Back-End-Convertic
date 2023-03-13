@@ -9,11 +9,20 @@ public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false)
+    private String nombre;
+    @Column(nullable = false)
     private String descripcion;
-    private String color;
+    @Column(nullable = false)
     private double precio;
+    @Column(nullable = false)
     private int busqueda;
+    @Column(nullable = false)
     private String imagen;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_color")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Color color;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_marca")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -26,12 +35,13 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(String descripcion, String color, double precio, int busqueda, String imagen, Marca marca, Genero genero) {
+    public Producto(String nombre, String descripcion, double precio, int busqueda, String imagen, Color color, Marca marca, Genero genero) {
+        this.nombre = nombre;
         this.descripcion = descripcion;
-        this.color = color;
         this.precio = precio;
         this.busqueda = busqueda;
         this.imagen = imagen;
+        this.color = color;
         this.marca = marca;
         this.genero = genero;
     }
@@ -44,20 +54,20 @@ public class Producto {
         this.id = id;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public double getPrecio() {
@@ -72,8 +82,8 @@ public class Producto {
         return busqueda;
     }
 
-    public void setBusqueda(int busquedas) {
-        this.busqueda = busquedas;
+    public void setBusqueda(int busqueda) {
+        this.busqueda = busqueda;
     }
 
     public String getImagen() {
@@ -82,6 +92,14 @@ public class Producto {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public Marca getMarca() {

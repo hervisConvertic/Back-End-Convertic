@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name="datos_envio_venta")
-public class DatosEnvioVenta {
+@Table(name="ventas")
+public class Venta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -17,6 +17,10 @@ public class DatosEnvioVenta {
     private String correo;
     @Column(nullable = false)
     private LocalDate fecha;
+
+    @Column(nullable = false)
+    private double total;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_ciudad")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -26,10 +30,10 @@ public class DatosEnvioVenta {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Usuario usuario;
 
-    public DatosEnvioVenta() {
+    public Venta() {
     }
 
-    public DatosEnvioVenta(int id, String direccion, String correo, LocalDate fecha, Ciudad ciudad, Usuario usuario) {
+    public Venta(int id, String direccion, String correo, LocalDate fecha, Ciudad ciudad, Usuario usuario) {
         this.id = id;
         this.direccion = direccion;
         this.correo = correo;
