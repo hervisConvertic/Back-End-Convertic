@@ -59,8 +59,8 @@ public class CarritoCompraServicio implements ICarritoCompraServicio {
                 Integer cantidad = carritoCompra.getCantidad();
                 ProductoTalla productoTalla = productoTallaRepositorio.findById(idProductoTalla).orElseThrow();
 
-                Integer nuevoInventario = productoTalla.getStock() - cantidad;
-                productoTalla.setStock(nuevoInventario);
+                Integer nuevoInventario = productoTalla.getInventario() - cantidad;
+                productoTalla.setInventario(nuevoInventario);
                 productoTallaRepositorio.save(productoTalla);
             }
 

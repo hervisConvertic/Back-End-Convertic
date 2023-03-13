@@ -10,7 +10,7 @@ public class ProductoTalla {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false)
-    private int stock;
+    private int inventario;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_talla")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -24,7 +24,7 @@ public class ProductoTalla {
     }
 
     public ProductoTalla(int stock, Talla talla, Producto producto) {
-        this.stock = stock;
+        this.inventario = stock;
         this.talla = talla;
         this.producto = producto;
     }
@@ -37,12 +37,12 @@ public class ProductoTalla {
         this.id = id;
     }
 
-    public int getStock() {
-        return stock;
+    public int getInventario() {
+        return inventario;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setInventario(int stock) {
+        this.inventario = stock;
     }
 
     public Talla getTalla() {
