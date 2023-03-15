@@ -68,4 +68,13 @@ public class CarritoCompraServicio implements ICarritoCompraServicio {
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public void eliminarCaaritoPorIdUsuario(Integer id) throws Exception {
+        try {
+            carritoCompraRepositorio.deleteCarritoCompraByUsuarioId(id);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 }

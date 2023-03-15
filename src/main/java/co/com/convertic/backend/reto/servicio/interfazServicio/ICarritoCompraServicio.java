@@ -13,4 +13,6 @@ public interface ICarritoCompraServicio {
     void delete(Integer id) throws Exception;
 
     void actualizarInventario(Integer id) throws Exception;
+
+    void eliminarCaaritoPorIdUsuario(Integer id) throws Exception;
 }

@@ -15,4 +15,7 @@ public interface ICarritoCompraRepositorio extends JpaRepository<CarritoCompra, 
 
     List<CarritoCompra> findCarritoCompraByUsuarioId(Integer id);
 
+    @Query("DELETE FROM CarritoCompra  WHERE usuario.id =:id")
+    void deleteCarritoCompraByUsuarioId(Integer id);
+
 }
