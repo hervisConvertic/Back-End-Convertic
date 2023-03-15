@@ -46,12 +46,12 @@ public class CarritoCompraControlador {
         }
     }
     @DeleteMapping("/usuario/{id}")
-    public ResponseEntity<CarritoCompra> eliminarCarritoPorIdUsuario(@PathVariable Integer id){
+    public ResponseEntity<?> eliminarCarritoPorIdUsuario(@PathVariable int id){
         try {
-            carritoCompraServicio.eliminarCaaritoPorIdUsuario(id);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            carritoCompraServicio.eliminarCarritoPorIdUsuario(id);
+            return ResponseEntity.status(HttpStatus.OK).body("se eliminaron los registros");
         }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 

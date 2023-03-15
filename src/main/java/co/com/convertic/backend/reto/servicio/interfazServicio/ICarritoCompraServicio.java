@@ -14,5 +14,5 @@ public interface ICarritoCompraServicio {
 
     void actualizarInventario(Integer id) throws Exception;
 
-    void eliminarCaaritoPorIdUsuario(Integer id) throws Exception;
+    void eliminarCarritoPorIdUsuario(Integer id) throws Exception;
 }
